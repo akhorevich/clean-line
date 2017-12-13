@@ -1,0 +1,31 @@
+body {
+  padding-top: 5rem;
+}
+
+.starter-template {
+  padding: 3rem 1.5rem;
+}
+
+.starter-template h1, h2 {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.starter-template .row{
+  margin-bottom: 10px;
+}
+.starter-template .row .title{
+  font-weight: bold;
+}
+
+.starter-template .count{
+  margin: 30px 0px 70px;
+}
+
+.starter-template img{
+  width: 30%;
+  margin: 0 auto 20px;
+}
+.result{
+  margin: 50px 0;
+}
