@@ -15,6 +15,7 @@
 
   <!-- Custom styles for this template -->
   <link href="css/style.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -39,53 +40,58 @@
     </div>
   </nav>
 
-  <main role="main" class="container">
+  <div class="starter-template container">
+    <h2>Введите данные для уточнения вариантов расчета</h2>
 
-    <div class="starter-template">
-      <h2>Введите данные для уточнения вариантов расчета</h2>
-
-      <div class="count">
-        <div class="row">
-          <div class="col-md-4 title">Численность сотрудников</div>
-          <div class="col-md-6"><input type =”text” id="people"></input>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4 title">Выручка за 9 месяцев</div>
-          <div class="col-md-6"><input type =”text” id="month"></input>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4 title">Годовая выручка</div>
-          <div class="col-md-6"><input type =”text” id="year"></input>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4 title">Стоимость амортизируемого имущества</div>
-          <div class="col-md-6"><input type =”text” id="cost"></input>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4 title">Доля участия в уставном капитале других компаний</div>
-          <div class="col-md-6"><input type =”text” id="other"></input>
-          </div>
+    <form name="myForm" action="" onsubmit="calculator();return false;" method="post">
+      <div class="form-group row">
+        <label for="people" class="col-sm-4 col-form-label title">Численность сотрудников</label>
+        <div class="col-sm-4">
+          <input type="number" class="form-control" id="people" required>
         </div>
       </div>
-      <a class="btn btn-success count-but" href="#" onclick="calculator()" role="button">Расчитать</a>
-    </div>
+      <div class="form-group row">
+        <label for="month" class="col-sm-4 col-form-label title">Выручка за 9 месяцев</label>
+        <div class="col-sm-4">
+          <input type="number" class="form-control" id="month" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="year" class="col-sm-4 col-form-label title">Годовая выручка</label>
+        <div class="col-sm-4">
+          <input type="number" class="form-control" id="year" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="cost" class="col-sm-4 col-form-label title">Стоимость амортизирующего имущество</label>
+        <div class="col-sm-4">
+          <input type="number" class="form-control" id="cost" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="other" class="col-sm-4 col-form-label title">Доля участия в уставном капитале других кампаний</label>
+        <div class="col-sm-4">
+          <input type="number" class="form-control" id="other" required>
+        </div>
+      </div>
 
-  </main>
-  <!-- /.container -->
-
+      <div class="form-group row">
+        <div class="offset-sm-2 col-sm-10">
+          <input type="submit" value="Расчитать" class="btn btn-success count-but">
+        </div>
+      </div>
+    </form>
+  </div>
 
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script>
     window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery.min.js"><\/script>')
   </script>
-  <script src="../../../../assets/js/vendor/popper.min.js"></script>
   <script src="dist/js/bootstrap.min.js"></script>
   <script src="js/main-count.js"></script>
+  <script src="js/popper.min.js"></script>
 </body>
 
 </html>
+<script src="../../../../assets/js/vendor/popper.min.js"></script>

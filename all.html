@@ -8,7 +8,7 @@
   <meta name="author" content="">
   <link rel="icon" href="img/favicon.ico">
 
-  <title>Clean Line Nalog - ОСН</title>
+  <title>Clean Line Nalog - Общий расчет</title>
 
   <!-- Bootstrap core CSS -->
   <link href="dist/css/bootstrap.min.css" rel="stylesheet">
@@ -38,13 +38,21 @@
 
     </div>
   </nav>
-  <div class="starter-template container">
+
+  <div class="starter-template container" id="main">
     <h2>Введите данные для уточнения вариантов расчета</h2>
-    <form name="myForm" action="" onsubmit="osnCalc();return false;" method="post">
+
+    <form name="myForm" action="" onsubmit="allCount();return false;" method="post">
       <div class="form-group row">
         <label for="income" class="col-sm-4 col-form-label title">Доходы с 01.01 по 31.12</label>
         <div class="col-sm-4">
           <input type="number" class="form-control" id="income" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="revenue" class="col-sm-4 col-form-label title">Выручка с 01.01 по 31.12</label>
+        <div class="col-sm-4">
+          <input type="number" class="form-control" id="revenue" required>
         </div>
       </div>
       <div class="form-group row">
@@ -54,9 +62,9 @@
         </div>
       </div>
       <div class="form-group row">
-        <label for="revenue" class="col-sm-4 col-form-label title">Годовая выручка</label>
+        <label for="costs" class="col-sm-4 col-form-label title">Расходы с 01.01 по 31.12</label>
         <div class="col-sm-4">
-          <input type="number" class="form-control" id="revenue" required>
+          <input type="number" class="form-control" id="costs" required>
         </div>
       </div>
       <div class="form-group row">
@@ -64,11 +72,6 @@
         <div class="col-sm-4">
           <input type="number" class="form-control" id="stock" required>
         </div>
-      </div>
-
-      <div class="result">
-        <p id="res"></p>
-        <p id="st"></p>
       </div>
 
       <div class="form-group row">
@@ -79,25 +82,62 @@
     </form>
   </div>
 
+  <div id="info">
+
+    <h2>Налоговая нагрузка и рекомендуемый вариант</h2>
+
+    <div id="first">
+      <h3>УСН "Доходы"</h3>
+      <div class="container">
+        <table id="dataTable">
+          <tr>
+            <td><b>Доходы с 01.01 по 31.12</b></td>
+            <td><p id="res"></p></td>
+          </tr>
+          <tr>
+            <td><b>Фонд заработной платы сотрудников</b></td>
+            <td><p id="st"></p></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div id="second">
+      <h3>УСН "Доходы - Расходы"</h3>
+   <div class="container">
+        <table id="dataTable">
+          <tr>
+            <td><b>Доходы с 01.01 по 31.12</b></td>
+            <td><p id="res"></p></td>
+          </tr>
+          <tr>
+            <td><b>Фонд заработной платы сотрудников</b></td>
+            <td><p id="st"></p></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div id="third">
+      <h3>ОСН</h3>
+     <div class="container">
+        <table id="dataTable">
+          <tr>
+            <td><b>Доходы с 01.01 по 31.12</b></td>
+            <td><p id="res"></p></td>
+          </tr>
+          <tr>
+            <td><b>Фонд заработной платы сотрудников</b></td>
+            <td><p id="st"></p></td>
+          </tr>
+        </table>
+      </div>
+  </div>
+  <div class="col-md-4 text-center" id="but">
+        <button class="btn btn-success" id="btnExport" onclick="javascript:xport.toCSV('dataTable');">Выгрузить в Excel</button> 
+    </div>
+
   <!-- /.container -->
 
 
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Внимание!</h4>
-        </div>
-        <div class="modal-body">
-          Все поля должны содержать числовые значения! Поля не могут быть пустыми!
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script>

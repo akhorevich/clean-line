@@ -39,33 +39,36 @@
     </div>
   </nav>
 
-  <main role="main" class="container">
+  <div class="starter-template container">
+    <h2>Введите данные для уточнения вариантов расчета</h2>
 
-    <div class="starter-template">
-      <h2>Введите данные для уточнения вариантов расчета</h2>
-
-      <div class="count">
-        <div class="row">
-          <div class="col-md-4 title">Доходы с 01.01 по 31.12</div>
-          <div class="col-md-3"><input type=”text” id="income"></input>
-          </div>
-
+    <form name="myForm" action="" onsubmit="incomeCalc();return false;" method="post">
+      <div class="form-group row">
+        <label for="income" class="col-sm-4 col-form-label title">Доходы с 01.01 по 31.12</label>
+        <div class="col-sm-4">
+          <input type="number" class="form-control" id="income" required>
         </div>
-        <div class="row">
-          <div class="col-md-4 title">Фонд заработной платы сотрудников</div>
-          <div class="col-md-3"><input type=”text” id="stock"></input>
-          </div>
+      </div>
+      <div class="form-group row">
+        <label for="stock" class="col-sm-4 col-form-label title">Фонд заработной платы сотрудников</label>
+        <div class="col-sm-4">
+          <input type="number" class="form-control" id="stock" required>
         </div>
-        <div class="result">
-          <p id="res"></p>
-          <p id="st"></p>
-        </div>
-
-
-        <a class="btn btn-success count-but" href="#" onclick="income()" role="button">Расчитать</a>
       </div>
 
-  </main>
+      <div class="result">
+        <p id="res"></p>
+        <p id="st"></p>
+      </div>
+
+      <div class="form-group row">
+        <div class="offset-sm-2 col-sm-10">
+          <input type="submit" value="Расчитать" class="btn btn-success count-but">
+        </div>
+      </div>
+    </form>
+  </div>
+
   <!-- /.container -->
 
 
@@ -74,7 +77,7 @@
   <script>
     window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery.min.js"><\/script>')
   </script>
-  <script src="../../../../assets/js/vendor/popper.min.js"></script>
+  <script src="js/popper.min.js"></script>
   <script src="dist/js/bootstrap.min.js"></script>
   <script src="js/main-count.js"></script>
 </body>
