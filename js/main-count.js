@@ -1,3 +1,4 @@
+
 var isNumber = /^-?\d+$/; // Регулярное выражение, проверяющее чтобы строка содержало числа и не было пустым.
 
 function calculator() {
@@ -25,9 +26,21 @@ function incomeCalc() {
   var fee = (stock * 0.22) + (stock * 0.029) + (stock * 0.051);
   var res = document.getElementById('res');
   var st = document.getElementById('st');
+  var pf = document.getElementById('pf');
+  var fss = document.getElementById('fss');
+  var foms = document.getElementById('foms');
 
-  res.innerHTML = "Налог УСН 'Доходы': <b>" + result.toFixed(2) + "</b> руб.";
-  st.innerHTML = "Страховые взносы: <b>" + fee.toFixed(2) + "</b> руб.";
+  if (fee < result/2) { // Если страховые взносы меньше 50% от налогов
+    result = result - fee; // то сумма налогов уменьшается на сумму взносов
+  } else { // если нет - 
+    result = result / 2; // то сумма налогов уменьшается на 50%
+  }
+
+  res.innerHTML = "Налог ОСН: <b>" + result.toFixed(2) + "</b> руб.";
+  st.innerHTML = "<b>Страховые взносы:</b>";
+  pf.innerHTML = "ПФР: <b>" + (stock * 0.22).toFixed(2) + "</b> руб.";
+  fss.innerHTML = "ФСС: <b>" + (stock * 0.029).toFixed(2) + "</b> руб.";
+  foms.innerHTML = "ФОМС: <b>" + (stock * 0.051).toFixed(2) + "</b> руб.";
 
 }
 
@@ -40,99 +53,186 @@ function costsCalc() {
   var fee = (stock * 0.22) + (stock * 0.029) + (stock * 0.051);
   var res = document.getElementById('res');
   var st = document.getElementById('st');
+  var pf = document.getElementById('pf');
+  var fss = document.getElementById('fss');
+  var foms = document.getElementById('foms');
 
-  res.innerHTML = "Налог УСН 'Расходы': <b>" + result.toFixed(2) + "</b> руб.";
-  st.innerHTML = "Страховые взносы: <b>" + fee.toFixed(2) + "</b> руб.";
+  res.innerHTML = "Налог ОСН: <b>" + result.toFixed(2) + "</b> руб.";
+  st.innerHTML = "<b>Страховые взносы:</b>";
+  pf.innerHTML = "ПФР: <b>" + (stock * 0.22).toFixed(2) + "</b> руб.";
+  fss.innerHTML = "ФСС: <b>" + (stock * 0.029).toFixed(2) + "</b> руб.";
+  foms.innerHTML = "ФОМС: <b>" + (stock * 0.051).toFixed(2) + "</b> руб.";
 
 
 }
 
 function osnCalc() {
-  var income = parseInt(document.getElementById('income').value);
-  var ssi = parseInt(document.getElementById('ssi').value);
-  var revenue = parseInt(document.getElementById('revenue').value);
-  var stock = parseInt(document.getElementById('stock').value);
+  var income = parseInt(document.getElementById('income').value); //Прибыль
+  var ssi = parseInt(document.getElementById('ssi').value); //ССИ
+  var revenue = parseInt(document.getElementById('revenue').value); //Выручка
+  var stock = parseInt(document.getElementById('stock').value); //Фонд заработной
 
-  var fee = (stock * 0.22) + (stock * 0.029) + (stock * 0.051);
+  var fee = (stock * 0.22) + (stock * 0.029) + (stock * 0.051); //Страховые взносы
   var result = (income * 0.2) + (ssi * 0.022) + (revenue * 0.18) + fee;
 
   var res = document.getElementById('res');
   var st = document.getElementById('st');
-
+  var pf = document.getElementById('pf');
+  var fss = document.getElementById('fss');
+  var foms = document.getElementById('foms');
 
   res.innerHTML = "Налог ОСН: <b>" + result.toFixed(2) + "</b> руб.";
-  st.innerHTML = "Страховые взносы: <b>" + fee.toFixed(2) + "</b> руб.";
+  st.innerHTML = "<b>Страховые взносы:</b>";
+  pf.innerHTML = "ПФР: <b>" + (stock * 0.22).toFixed(2) + "</b> руб.";
+  fss.innerHTML = "ФСС: <b>" + (stock * 0.029).toFixed(2) + "</b> руб.";
+  foms.innerHTML = "ФОМС: <b>" + (stock * 0.051).toFixed(2) + "</b> руб.";
 
 }
 
 function allCount() {
   var income = parseInt(document.getElementById('income').value);
   var revenue = parseInt(document.getElementById('revenue').value);
+  var profit = parseInt(document.getElementById('profit').value);
   var ssi = parseInt(document.getElementById('ssi').value);
   var costs = parseInt(document.getElementById('costs').value);
   var stock = parseInt(document.getElementById('stock').value);
+  var pf, fss, foms;
+  var nn1Val,nn2Val, nn3Val;
+
 
   if (!isNumber.test(income) || !isNumber.test(revenue) || !isNumber.test(ssi) || !isNumber.test(stock)) {
     //$('#myModal').modal(show) // Проверка всех полей на соответствие.
     alert("error");
   } else {
-    fee = (stock * 0.22) + (stock * 0.029) + (stock * 0.051);
+    pf = stock * 0.22;
+    fss = stock * 0.029;
+    foms = stock * 0.051;
+    fee = stock * 0.3;
     res1 = income * 0.06;
     if (costs > 0) {
       res2 = (income - costs) * 0.15;
     }
-    res3 = (income * 0.2) + (ssi * 0.022) + (revenue * 0.18) + fee;
+    res3 = (profit * 0.2) + (ssi * 0.022) + (revenue * 0.18) + fee;
 
-    var type;
 
-    if (costs > 0) {
-      if (res1 < res2 && res1 < res3) {
-        type = 1;
-      } else if (res2 < res1 && res2 < res3) {
-        type = 2;
-      } else {
-        type = 3;
+    if (fee < res1/2) { // Если страховые взносы меньше 50% от налогов
+    res1 = res1 - fee; // то сумма налогов уменьшается на сумму взносов
+      } else { // если нет - 
+    res1 = res1 / 2; // то сумма налогов уменьшается на 50%
       }
-    } else {
-      if (res1 < res3) {
-        type = 1;
+
+      var type;
+
+      if (costs > 0) {
+          if (res1 < res2 && res1 < res3) {
+              type = 1;
+          }
+          if (res2 < res1 && res2 < res3) {
+              type = 2;
+          }
+          if (res3 < res1 && res3 < res2){
+              type = 3;
+          }
       } else {
-        type = 3;
+          if (res1 < res3) {
+              type = 1;
+          } else {
+              type = 3;
+          }
       }
-    }
+
+
 
     var main = document.getElementById("main");
     var info = document.getElementById("info");
-    var first = document.getElementById("first");
-    var second = document.getElementById("second");
-    var third = document.getElementById("third");
-    var but = document.getElementById("but");
+    var first = document.getElementById("fs");
+    var second = document.getElementById("sc");
+    var third = document.getElementById("th");
+    var but = document.getElementById("btnExport");
 
-    var incomeRes = document.getElementById('res');
-    var st = document.getElementById('st');
+    var incomeRes1 = document.getElementById('res1');
+    var incomeRes2 = document.getElementById('res2');
+    var incomeRes3 = document.getElementById('res3');
+    var nn1 = document.getElementById('nn1');
+    var nn2 = document.getElementById('nn2');
+    var nn3 = document.getElementById('nn3');
+    var st1 = document.getElementById('st1');
+    var st2 = document.getElementById('st2');
+    var st3 = document.getElementById('st3');
+
+    var nl1 = document.getElementById('nl1');
+    var nl2 = document.getElementById('nl2');
+    var nl3 = document.getElementById('nl3');
+
+    var pf1 = document.getElementById('pf1');
+    var pf2 = document.getElementById('pf2');
+    var pf3 = document.getElementById('pf3');
+
+    var fss1 = document.getElementById('fss1');
+    var fss2 = document.getElementById('fss2');
+    var fss3 = document.getElementById('fss3');
+
+    var foms1 = document.getElementById('foms1');
+    var foms2 = document.getElementById('foms2');
+    var foms3 = document.getElementById('foms3');
+
+    var nb1 = document.getElementById('nb1');
+    var nb2 = document.getElementById('nb2');
+    var nb3 = document.getElementById('nb3');
+
 
     main.style.display = "none";
     info.style.display = "block";
-    switch (type) {
-      case 1:
-        first.style.display = "block";
-        but.style.display = "block";
-        incomeRes.innerHTML = res1.toFixed(2) + "</b> руб.";
-        st.innerHTML = fee.toFixed(2) + "</b> руб.";
-        break;
-      case 2:
-        second.style.display = "block";
-        but.style.display = "block";
-        incomeRes.innerHTML = res2.toFixed(2) + "</b> руб.";
-        st.innerHTML = fee.toFixed(2) + "</b> руб.";
-        break;
-      case 3:
-        third.style.display = "block";
-        but.style.display = "block";
-        incomeRes.innerHTML = res3.toFixed(2) + "</b> руб.";
-        st.innerHTML = fee.toFixed(2) + "</b> руб.";
-        break;
-    }
+    incomeRes1.innerHTML = res1.toFixed(2) + " руб.";
+    incomeRes2.innerHTML = res2.toFixed(2) + " руб.";
+    incomeRes3.innerHTML = res3.toFixed(2) + " руб.";
+
+    st1.innerHTML = st2.innerHTML = st3.innerHTML = fee.toFixed(2) + "</b> руб.";
+
+    pf1.innerHTML = pf2.innerHTML = pf3.innerHTML =  pf.toFixed(2) + "</b> руб.";
+
+    fss1.innerHTML = fss2.innerHTML = fss3.innerHTML = fss.toFixed(2) + "</b> руб.";
+
+    foms1.innerHTML = foms2.innerHTML = foms3.innerHTML = foms.toFixed(2) + "</b> руб.";
+
+    var nb1Var = res1 + fee;
+    var nb2Var = res2 + fee;
+    var nb3Var = res3 + fee;
+    nb1.innerHTML = nb1Var.toFixed(2) + " руб.";
+    nb2.innerHTML = nb2Var.toFixed(2) + " руб.";
+    nb3.innerHTML = nb3Var.toFixed(2) + " руб.";
+
+
+      nn1Val = (res1/nb1Var)*100;
+      nn2Val = (res2/nb2Var)*100;
+      nn3Val = (res3/revenue)*100;
+
+      nn1.innerHTML = nn1Val.toFixed(2) + " %";
+      nn2.innerHTML = nn2Val.toFixed(2) + " %";
+      nn3.innerHTML = nn3Val.toFixed(2) + " %";
+
+
+
+
+      console.log(type)
+
+      switch (type) {
+         case 1:
+           first.setAttribute("id","win");
+          // incomeRes.innerHTML = res1.toFixed(2) + "</b> руб.";
+           //st.innerHTML = fee.toFixed(2) + "</b> руб.";
+           break;
+         case 2:
+         second.setAttribute("id","win");
+          // incomeRes.innerHTML = res2.toFixed(2) + "</b> руб.";
+          // st.innerHTML = fee.toFixed(2) + "</b> руб.";
+           break;
+         case 3:
+           third.setAttribute("id","win");
+           //incomeRes.innerHTML = res3.toFixed(2) + "</b> руб.";
+           //st.innerHTML = fee.toFixed(2) + "</b> руб.";
+           break;
+       }
 
   }
 }

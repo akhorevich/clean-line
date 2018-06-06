@@ -39,14 +39,15 @@ body {
 #first, #second, #third, #info, #but {
   display: none;
 }
-#first, #second, #third h3{
+#info .tit{
   margin-bottom: 30px;
+  font-size: 16px;
 }
 
-#first, #second, #third #but{
+#but{
   margin-top: 30px;
 }
-#res, #st p{
+#res p, #st p{
   text-align: right;
 }
 
@@ -55,7 +56,40 @@ body {
   text-align: center;
 }
 
-#first, #second, #third {
-  margin: auto;
-  width: calc(100% - 300px);
+#btnExport{
+  margin-top: 30px;
+}
+th{
+  background-color: #fff;
+}
+#dataTable table,th,td{
+  border: 1px solid #888888;
+}
+
+#fs, #sc, #th{
+    background-color: #d6d6d6;
+}
+
+#tt, th{
+    background-color: #bcbcbc;
+}
+#win{
+  background-color: #45b849;
+}
+
+col{
+  min-width: 250px;
+  background-color: rgba(214, 214, 214, 0.4);
+  margin-right: 5px;
+}
+
+thead{
+    background-color: #999999;
+}
+
+colgroup {
+    display: table-column-group;
+}
+#datatable{
+    margin: 40px;
 }

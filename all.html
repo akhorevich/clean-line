@@ -39,105 +39,122 @@
     </div>
   </nav>
 
-  <div class="starter-template container" id="main">
-    <h2>Введите данные для уточнения вариантов расчета</h2>
+  <div class="starter-template" id="main">
+    <div class="container">
+    <h2>Введите дополнительные данные для расчета</h2>
 
     <form name="myForm" action="" onsubmit="allCount();return false;" method="post">
       <div class="form-group row">
         <label for="income" class="col-sm-4 col-form-label title">Доходы с 01.01 по 31.12</label>
         <div class="col-sm-4">
-          <input type="number" class="form-control" id="income" required>
+          <input type="number" step="0.0001" class="form-control" id="income" required>
         </div>
       </div>
       <div class="form-group row">
         <label for="revenue" class="col-sm-4 col-form-label title">Выручка с 01.01 по 31.12</label>
         <div class="col-sm-4">
-          <input type="number" class="form-control" id="revenue" required>
+          <input type="number" step="0.0001" class="form-control" id="revenue" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="revenue" class="col-sm-4 col-form-label title">Прибыль с 01.01 по 31.12</label>
+        <div class="col-sm-4">
+          <input type="number" step="0.0001" class="form-control" id="profit" required>
         </div>
       </div>
       <div class="form-group row">
         <label for="ssi" class="col-sm-4 col-form-label title">Среднегодовая стоимость имущества</label>
         <div class="col-sm-4">
-          <input type="number" class="form-control" id="ssi" required>
+          <input type="number" step="0.0001" class="form-control" id="ssi" required>
         </div>
       </div>
       <div class="form-group row">
         <label for="costs" class="col-sm-4 col-form-label title">Расходы с 01.01 по 31.12</label>
         <div class="col-sm-4">
-          <input type="number" class="form-control" id="costs" required>
+          <input type="number" step="0.0001" class="form-control" id="costs" required>
         </div>
       </div>
       <div class="form-group row">
         <label for="stock" class="col-sm-4 col-form-label title">Фонд заработной платы сотрудников</label>
         <div class="col-sm-4">
-          <input type="number" class="form-control" id="stock" required>
+          <input type="number" step="0.0001" class="form-control" id="stock" required>
         </div>
       </div>
 
       <div class="form-group row">
-        <div class="offset-sm-2 col-sm-10">
-          <input type="submit" value="Расчитать" class="btn btn-success count-but">
+        <div class="col-sm-offset-2 col-sm-10">
+          <input type="submit" value="Рассчитать" class="btn btn-success count-but">
         </div>
       </div>
     </form>
   </div>
+</div>
+  <div id="info" class="container">
 
-  <div id="info">
+    <div class="row">
 
-    <h2>Налоговая нагрузка и рекомендуемый вариант</h2>
 
-    <div id="first">
-      <h3>УСН "Доходы"</h3>
-      <div class="container">
-        <table id="dataTable">
-          <tr>
-            <td><b>Доходы с 01.01 по 31.12</b></td>
-            <td><p id="res"></p></td>
-          </tr>
-          <tr>
-            <td><b>Фонд заработной платы сотрудников</b></td>
-            <td><p id="st"></p></td>
-          </tr>
-        </table>
+      <div class=".col-md-6 .col-md-offset-3">
+
+        <h2>Налоговая нагрузка и рекомендуемый вариант</h2>
+            <table id="dataTable">
+              <colgroup id="tt"/>
+              <colgroup id="fs"/>
+              <colgroup id="sc"/>
+              <colgroup id="th"/>
+              <tr>
+                <th>Поле</th>
+                <th>УСН "Доходы"</th>
+                <th>УСН "Доходы - Расходы"</th>
+                <th>ОСН</th>
+              </tr>
+              <tr>
+                <td><b>Единый налог</b></td>
+                <td><p id="res1"></p></td>
+                <td><p id="res2"></p></td>
+                <td><p id="res3"></p></td>
+              </tr>
+              <tr>
+                <td><b>Страховые взносы</b></td>
+                <td><p id="st1"></p></td>
+                <td><p id="st2"></p></td>
+                <td><p id="st3"></p></td>
+              </tr>
+              <tr>
+                <td><b>Пенсионный фонд</b></td>
+                <td><p id="pf1"></p></td>
+                <td><p id="pf2"></p></td>
+                <td><p id="pf3"></p></td>
+              </tr>
+              <tr>
+                <td><b>ФСС</b></td>
+                <td><p id="fss1"></p></td>
+                <td><p id="fss2"></p></td>
+                <td><p id="fss3"></p></td>
+              </tr>
+              <tr>
+                <td><b>ФОМС</b></td>
+                <td><p id="foms1"></p></td>
+                <td><p id="foms2"></p></td>
+                <td><p id="foms3"></p></td>
+              </tr>
+              <tr>
+                <td><b>Налоговое бремя</b></td>
+                <td><p id="nb1"></p></td>
+                <td><p id="nb2"></p></td>
+                <td><p id="nb3"></p></td>
+              </tr>
+              <tr>
+                <td><b>Налоговая нагрузка</b></td>
+                <td><p id="nn1"></p></td>
+                <td><p id="nn2"></p></td>
+                <td><p id="nn3"></p></td>
+              </tr>
+            </table>
+            <button class="btn btn-success" id="btnExport" onclick="tableToExcel('dataTable', 'Counts');">Выгрузить в Excel</button>
       </div>
     </div>
-    <div id="second">
-      <h3>УСН "Доходы - Расходы"</h3>
-   <div class="container">
-        <table id="dataTable">
-          <tr>
-            <td><b>Доходы с 01.01 по 31.12</b></td>
-            <td><p id="res"></p></td>
-          </tr>
-          <tr>
-            <td><b>Фонд заработной платы сотрудников</b></td>
-            <td><p id="st"></p></td>
-          </tr>
-        </table>
-      </div>
-    </div>
-    <div id="third">
-      <h3>ОСН</h3>
-     <div class="container">
-        <table id="dataTable">
-          <tr>
-            <td><b>Доходы с 01.01 по 31.12</b></td>
-            <td><p id="res"></p></td>
-          </tr>
-          <tr>
-            <td><b>Фонд заработной платы сотрудников</b></td>
-            <td><p id="st"></p></td>
-          </tr>
-        </table>
-      </div>
   </div>
-  <div class="col-md-4 text-center" id="but">
-        <button class="btn btn-success" id="btnExport" onclick="javascript:xport.toCSV('dataTable');">Выгрузить в Excel</button> 
-    </div>
-
-  <!-- /.container -->
-
-
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script>
